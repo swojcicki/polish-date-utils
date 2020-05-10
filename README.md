@@ -1,6 +1,6 @@
 ## Introduction
 
-todo
+This project contains classes for manging some polish (and not only) feast and days off.
 
 ## Usage
 
