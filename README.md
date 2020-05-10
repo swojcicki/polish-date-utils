@@ -11,6 +11,6 @@ Markdown is a lightweight and easy-to-use syntax for styling your writing. It in
 
 This class counts Easter date for given year. 
 
-```
+```java
 Easter.of(2020).getDate();
 ```
