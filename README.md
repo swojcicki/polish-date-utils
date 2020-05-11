@@ -1,3 +1,4 @@
+# Simple documentation
 ## Introduction
 
 This project contains classes for managing some polish (and not only) feast and days off.
