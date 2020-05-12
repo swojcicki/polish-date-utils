@@ -22,6 +22,6 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
 #      run: mvn -B package --file pom.xml
-#      run: mvn cobertura:cobertura
+      run: mvn cobertura:cobertura
     - name: Upload reports
        run: bash <(curl -s https://codecov.io/bash) -t 26085e3a-b128-4d68-bd46-d55d05760ead
