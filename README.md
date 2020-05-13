@@ -1,4 +1,4 @@
-# Simple documentation
+# polish-date-utils ![Java CI with Maven](https://github.com/swojcicki/polish-date-utils/workflows/Java%20CI%20with%20Maven/badge.svg)
 ## Introduction
 
 This project contains classes for managing some polish (and not only) feast and days off.
