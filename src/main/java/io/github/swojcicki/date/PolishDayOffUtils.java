@@ -14,14 +14,6 @@ public final class PolishDayOffUtils {
     throw new UnsupportedOperationException();
   }
 
-  public static LocalDate getFirstWorkDayBefore(LocalDate date) {
-    return DayOffUtils.getFirstWorkDayBefore(date, PolishDayOff.of(date));
-  }
-
-  public static LocalDate getFirstWorkDayAfter(LocalDate date) {
-    return DayOffUtils.getFirstWorkDayAfter(date, PolishDayOff.of(date));
-  }
-
   public static int getWorkingDays(int year) {
     LocalDate date = LocalDate.of(year, 1, 1);
     int workingDays = 0;
@@ -55,4 +47,5 @@ public final class PolishDayOffUtils {
     }
     return workingDays;
   }
+
 }
