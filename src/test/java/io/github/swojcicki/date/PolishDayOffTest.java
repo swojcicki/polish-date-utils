@@ -55,10 +55,23 @@ public class PolishDayOffTest {
     try (Stream<String> stream = Files.lines(Paths.get("src", "test", "resources", "court.csv"))) {
       stream
         .filter(line -> !line.trim().startsWith("#"))
-        .forEach(line -> assertLine(line, 7, 7));
+        .forEach(this::assertCourtLine);
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  private void assertCourtLine(String line) {
+    String[] dates = line.split(";");
+    LocalDate firstNoticeDate = LocalDate.parse(dates[0]);
+    LocalDate secondNotice = PolishDayOff.of(firstNoticeDate).findWorkingDayAfterDays(7);
+    LocalDate secondNoticeRealisation = PolishDayOff.of(secondNotice).findWorkingDayAfterDays(1);
+    LocalDate storageDate = PolishDayOff.of(secondNoticeRealisation).findWorkingDayAfterDays(7);
+    LocalDate returnDate = PolishDayOff.of(storageDate).findWorkingDayAfterDays(1);
+
+    Assertions.assertEquals(LocalDate.parse(dates[1]), secondNoticeRealisation, "Second notice realisation date wrong for " + firstNoticeDate);
+    Assertions.assertEquals(LocalDate.parse(dates[2]), storageDate, "Storage date wrong for " + firstNoticeDate);
+    Assertions.assertEquals(LocalDate.parse(dates[3]), returnDate, "Return date wrong for " + firstNoticeDate);
   }
 
   @Test
@@ -66,18 +79,18 @@ public class PolishDayOffTest {
     try (Stream<String> stream = Files.lines(Paths.get("src", "test", "resources", "adm.csv"))) {
       stream
         .filter(line -> !line.trim().startsWith("#"))
-        .forEach(line -> assertLine(line, 7, 6));
+        .forEach(this::assertAdmLine);
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
-  private void assertLine(String line, int noticeDays, int returnDays) {
+  private void assertAdmLine(String line) {
     String[] dates = line.split(";");
     LocalDate firstNoticeDate = LocalDate.parse(dates[0]);
-    LocalDate secondNotice = PolishDayOff.of(firstNoticeDate).findWorkingDayAfterDays(noticeDays);
+    LocalDate secondNotice = PolishDayOff.of(firstNoticeDate).findWorkingDayAfterDays(7);
     LocalDate secondNoticeRealisation = PolishDayOff.of(secondNotice).findWorkingDayAfterDays(1);
-    LocalDate storageDate = PolishDayOff.of(secondNoticeRealisation).findWorkingDayAfterDays(returnDays);
+    LocalDate storageDate = PolishDayOff.of(firstNoticeDate).findWorkingDayAfterDays(14);
     LocalDate returnDate = PolishDayOff.of(storageDate).findWorkingDayAfterDays(1);
 
     Assertions.assertEquals(LocalDate.parse(dates[1]), secondNoticeRealisation, "Second notice realisation date wrong for " + firstNoticeDate);
