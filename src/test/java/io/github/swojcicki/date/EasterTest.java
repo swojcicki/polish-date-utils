@@ -75,4 +75,40 @@ public class EasterTest {
     Assertions.assertEquals(LocalDate.of(year, 4, 20), easter.getDate()); // from internet
     Assertions.assertEquals(year, easter.getYear());
   }
+
+  @Test
+  public void easter_epact_25() {
+    int year = 2011;
+    Easter easter = Easter.of(year);
+    Assertions.assertEquals(DayOfWeek.SUNDAY, easter.getDate().getDayOfWeek());
+    Assertions.assertEquals(LocalDate.of(year, 4, 24), easter.getDate());
+    Assertions.assertEquals(year, easter.getYear());
+  }
+
+  @Test
+  public void easter_epact_24() {
+    int year = 2019;
+    Easter easter = Easter.of(year);
+    Assertions.assertEquals(DayOfWeek.SUNDAY, easter.getDate().getDayOfWeek());
+    Assertions.assertEquals(LocalDate.of(year, 4, 21), easter.getDate());
+    Assertions.assertEquals(year, easter.getYear());
+  }
+
+  @Test
+  public void easter_golden_eq_11() {
+    int year = 2005;
+    Easter easter = Easter.of(year);
+    Assertions.assertEquals(DayOfWeek.SUNDAY, easter.getDate().getDayOfWeek());
+    Assertions.assertEquals(LocalDate.of(year, 3, 27), easter.getDate());
+    Assertions.assertEquals(year, easter.getYear());
+  }
+
+  @Test
+  public void easter_epact_eq_25_golden_le_11() {
+    int year = 1886;
+    Easter easter = Easter.of(year);
+    Assertions.assertEquals(DayOfWeek.SUNDAY, easter.getDate().getDayOfWeek());
+    Assertions.assertEquals(LocalDate.of(year, 4, 25), easter.getDate());
+    Assertions.assertEquals(year, easter.getYear());
+  }
 }
